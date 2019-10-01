@@ -14,7 +14,7 @@ setup(
     version='0.3.6dev',
     description='D/L Lectures/Data from Canvas',
     long_description=readme('README.md'),
-    url='https://github.com/stucamp/CanvasScraper',
+    url='https://gitlab.com/stucamp/canvasscraper',
     author='Stu Campbell',
     author_email='stucampbell.git@gmail.com',
     packages=[
