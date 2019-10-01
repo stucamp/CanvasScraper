@@ -1,18 +1,23 @@
-# The following variables will automatically be passed down to the Postgres container
-# as well as the Ruby container and available within each.
-# variables:
-  
-# services:
-# - name: 
- 
+image: python:3
 
-image:
-  name: python
-#  entrypoint: ["/bin/bash"]
-
-before_script:
-- bundle install
-
-test:
+rspec:
+  stage: test
   script:
-  - bundle exec rake spec
+    - bundle install
+    - rspec
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  stage: deploy
+  dependencies:
+    - rspec
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
