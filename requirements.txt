@@ -1,0 +1,7 @@
+# virtualenv
+selenium
+youtube-dl
+pyderman
+
+# You will want to ensure whatever webdriver you use is compatible with the Web Browser on your system.  For me, I
+# acutally had to download an older version of ChromeDriver since the Ubuntu repositories only have Chrome 77.

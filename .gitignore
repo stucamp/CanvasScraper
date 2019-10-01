@@ -1,0 +1,30 @@
+# Project exclude paths
+
+#
+# IDE/Env
+#
+.env
+.venv
+env/
+venv/
+.idea/
+
+
+#
+# Test Files/Dirs
+#
+Courses/
+class_vids_list.txt
+videoList.txt
+canvasscraper/lib/*
+canvasscraper/*.log
+
+
+#
+# PyPi
+#
+*.manifest
+*.spec
+build
+dist/
+sdist/
