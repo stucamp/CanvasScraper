@@ -1,4 +1,6 @@
-  # CanvasScraper (Lecture Downloader) [![badge](https://action-badges.now.sh/stucamp/canvasscraper)](https://github.com/stucamp/canvasscraper/actions)
+  # CanvasScraper (Lecture Downloader) 
+  [![pipeline status](https://gitlab.com/stucamp/canvasscraper/badges/master/pipeline.svg)](https://gitlab.com/stucamp/canvasscraper/commits/master)
+  [![coverage report](https://gitlab.com/stucamp/canvasscraper/badges/master/coverage.svg)](https://gitlab.com/stucamp/canvasscraper/commits/master)
 
 ### Description
 
