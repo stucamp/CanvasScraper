@@ -1,4 +1,6 @@
 import sys
+import getpass
+
 import pyderman as dr
 from selenium.webdriver.chrome import webdriver as CHdr
 from selenium.webdriver.firefox import webdriver as FFdr
@@ -17,80 +19,42 @@ from canvasscraper.fileops.URLLogger import URLLogger
 AUTHOR = "stucampbell.git@gmail.com"
 
 
-def _browser_select():
+class InvalidBrowserException(Exception):
+    pass
 
-    browsers = {'1': 'Chrome',
-                '2': 'Firefox',
-                '3': 'Other',
-                'Q': 'Quit',
-                }
 
-    print("=====================================================\n"
-          "Please select your system Browser:                   \n"
-          "=====================================================\n")
-    for key, choice in browsers.items():
-        print(f"{key}) {choice}")
-    pick_em = input("Enter wisely: ")
-
-    if pick_em is 'Q':
-        sys.exit("User elected to quit")
-    elif pick_em is '3':
-        _get_out()
-    elif pick_em is '2':
+def install_browser_driver(args):
+    if args.browser.lower() == 'firefox':
         path = dr.install(browser=dr.firefox, file_directory='./lib/', verbose=True, chmod=True, overwrite=False,
                           version=None, filename=None, return_info=False)
-        return path, pick_em
-    elif pick_em is '1':
+    elif args.browser.lower() == 'chrome':
         path = dr.install(browser=dr.chrome, file_directory='./lib/', verbose=True, chmod=True, overwrite=False,
                           version=None, filename=None, return_info=False)
-        return path, pick_em
     else:
-        _im_out()
+        raise InvalidBrowserException(f"{args.browser} is not an expected browser")
+    return path
 
 
-def _run_headless():
-    gui = input(f"Do you want to run the browser with GUI? [y/N]")
-    if gui is "" or 'n' or "N":
-        return True
-    elif gui is "y" or "Y":
-        return False
-    else:
-        _im_out()
-
-
-def _get_out():
-    print("You're a Software Engineering student...\n"
-          "You should know Chrome or FireFox is the only acceptable response.")
-    sys.exit("Program refuses to work for a user with such poor judgement.  Exiting...")
-
-
-def _im_out():
-    print("No valid selection")
-    sys.exit("User failed a simple 'Pick-One' scenario... Yikes... I'm out.  Exiting...")
-
-
-def _set_driver(path, choice):
-    if choice is '1':
+def set_driver(path, args):
+    if args.browser.lower() == 'chrome':
         try:
             print("Chrome Driver")
             option = CHop()
-            option.add_argument(('--none', '--headless')[_run_headless()])
+            option.add_argument(('--none', '--headless')[not args.use_gui])
             return CHdr.WebDriver(executable_path=path, options=option)
         except SessionNotCreatedException:
             _exception_print('Chrome', 'ChromeDriver', 'https://chromedriver.chromium.org/downloads')
-    elif choice is '2':
+    elif args.browser.lower() == 'firefox':
         try:
             print("Gecko Driver")
             option = FFop()
-            option.add_argument(('-none', '-headless')[_run_headless()])
+            option.add_argument(('-none', '-headless')[not args.use_gui])
             return FFdr.WebDriver(executable_path=path, options=option)
         except SessionNotCreatedException:
             _exception_print('Firefox', 'GeckoDriver', 'https://github.com/mozilla/geckodriver/releases')
     else:
-        print("====================================\n"
-              "No Appropriate webdriver found!!!!!!\n"
-              "====================================\n")
-        sys.exit(1)
+        raise InvalidBrowserException("No Appropriate webdriver found!")
+
 
 
 def _exception_print(browser, driver, link):
@@ -102,24 +66,16 @@ def _exception_print(browser, driver, link):
           f"============================================================================\n")
 
 
-# TODO: Maybe obscure the log-in details... all just plain text at the moment
-def _login(driver):
-
-    un = input("Enter username: ")
-    pw = input("Enter password: ")
-    sub = input("Enter school subdomain, [asu] by default: ")
-
-    if sub == "":
-        sub = 'asu'
-
-    base_url = "https://" + sub + ".instructure.com"
+def login(driver, args):
+    base_url = "https://" + args.school + ".instructure.com"
     url = base_url + "/login"
 
     driver.get(url)
     WebDriverWait(driver, 10).until(EC.title_contains("ASURITE Sign-In"))
 
-    driver.find_element_by_id('username').send_keys(un)
-    driver.find_element_by_id('password').send_keys(pw)
+    username, password = args.username_password[0], args.username_password[1]
+    driver.find_element_by_id('username').send_keys(username)
+    driver.find_element_by_id('password').send_keys(password)
     driver.find_element_by_class_name('submit').click()
 
     WebDriverWait(driver, 10).until(EC.title_contains("Dashboard"))
