@@ -177,18 +177,13 @@ def _user_quit(driver):
 
 
 # TODO: Finish user interface options to include loading an existing file, selection of classes to download, etc.
-def main():
-    # print("Functions currently commented out for testing purposes.")
-    driver_path, browser = _browser_select()
-    print(driver_path, browser)
-    driver = _set_driver(driver_path, browser)
-    base_url = _login(driver)
+def main(args):
+    driver_path = install_browser_driver(args)
+    print(driver_path)
+    driver = set_driver(driver_path, args)
+    base_url = login(driver, args)
     print(f"Base URL Recorded as: {base_url}")
     # _test_link_scraper()
     # _test_dir_maker()
     # _test_URL_logger()
     _user_quit(driver)
-
-
-if __name__ == '__main__':
-    main()
