@@ -1,0 +1,23 @@
+image: python
+
+rspec:
+  stage: test
+  script:
+    - bundle install
+    - rspec
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  stage: deploy
+  dependencies:
+    - rspec
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master

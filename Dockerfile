@@ -1,5 +1,9 @@
-FROM python:latest
+FROM python:3
 
-RUN echo "Installing requirements..." && pip install -r requirements.txt
+WORKDIR /usr/src/app
 
-RUN python ./CanvasScraper.py
+COPY requirements.txt ./
+
+RUN echo "Installing requirements..." && pip install --no-cache-dir -r requirements.txt
+
+CMD [ "python3", "./CanvasScraper.py" ]
