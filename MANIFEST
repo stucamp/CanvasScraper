@@ -10,6 +10,7 @@ canvasscraper/NavTool.py
 canvasscraper/RegexCheck.py
 canvasscraper/__init__.py
 canvasscraper/__main__.py
+canvasscraper/arg_tools.py
 canvasscraper/fileops/DirMaker.py
 canvasscraper/fileops/Downloader.py
 canvasscraper/fileops/LinkScraper.py
