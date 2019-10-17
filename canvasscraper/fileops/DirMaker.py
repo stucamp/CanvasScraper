@@ -10,6 +10,7 @@ class DirMaker:
         self.new_base_dir = self.root_dir + "/Courses"
 
     def __make_base_dir(self):
+        os.chdir(self.root_dir)
         try:
             os.mkdir(self.new_base_dir)
         except FileExistsError:
@@ -33,10 +34,10 @@ class DirMaker:
                         # print(f"D/L {vid.course} video on {vid.page}:\n{vid.name} at {vid.url}")
                         if self.formattype == 'mp4':
                             print(f"\t\tDownloading Video from: {vid.url}")
-                            Downloader.download_as_video(vid, self.new_base_dir)
+                            Downloader.download_as_video(vid, self.new_base_dir+f"/{course_obj.name}")
                         elif self.formattype == 'mp3':
                             print(f"\t\tDownloading Audio from: {vid.url}")
-                            Downloader.download_as_mp3(vid, self.new_base_dir)
+                            Downloader.download_as_mp3(vid, self.new_base_dir+f"/{course_obj.name}")
                 else:
                     print(f"\tPage: {name} has no videos, nothing to save!")
         else:

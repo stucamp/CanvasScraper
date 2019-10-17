@@ -7,7 +7,7 @@ class Downloader:
     @staticmethod
     def download_as_video(vid_obj, path):
         ydl_opts = {
-            'outtmpl': f'{path}/{vid_obj.course}/{vid_obj.page} {vid_obj.name}',
+            'outtmpl': f'{path}/{vid_obj.course} - {vid_obj.page} {vid_obj.name}',
             'preferredquality': 'bestvideo/best',
             'preferredencoding': 'mp4',
             'replace_extension': 'yes',
@@ -20,13 +20,15 @@ class Downloader:
     def download_as_mp3(vid_obj, path):
         ydl_opts = {
             'outtmpl': f'{path}/{vid_obj.course} - {vid_obj.page} {vid_obj.name}',
-            'format': 'bestaudio/best',
+            'preferredquality': 'bestaudio/best',
+            'preferredencoding': 'mp4',
             'replace_extension': 'yes',
-            'postprocessors': [{'key': 'FFmpegExtractAudio',
-                                'preferredcodec': 'mp3',
-                                'preferredquality': '128',
-                                }],
+            'maxfilesize': '300M',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '128',
+            }],
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([vid_obj.url])
-
