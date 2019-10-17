@@ -2,6 +2,7 @@ import getpass
 import sys
 import inspect
 import argparse
+import os
 
 VALID_BROWSERS = ['chrome', 'firefox']
 VALID_FORMATS = ['mp4', 'mp3']
@@ -27,6 +28,13 @@ def get_args_from_cmd_line() -> argparse.Namespace:
         type=str,
         required=True
     )
+    required.add_argument(
+        "-d",
+        "--directory",
+        help="Path you'd like to download the content to (not yet implemented)",
+        default=os.getcwd(),
+        type=str
+    )
     optional.add_argument(
         "-gui",
         "--use_gui",
@@ -37,23 +45,16 @@ def get_args_from_cmd_line() -> argparse.Namespace:
         "-up",
         "--username_password",
         help="Provide your Canvas login credentials on the command line. If not provided here, you"
-             " will be prompted for them shortly. Ex: -cred jsmith32 pa$$word",
+             " will be prompted for them shortly. Ex: -up jsmith32 pa$$word",
         nargs=2,
         type=str
     )
     optional.add_argument(
         "-sch",
         "--school",
-        help="School subdomain, default: asu",
+        help="School's Instructure subdomain, default: asu",
         default="asu",
         type=str,
-    )
-    # TODO: Need to incorporate/finish this at some point... right now doesn't do anything
-    optional.add_argument(
-        "-d",
-        "--directory",
-        help="Path you'd like to download the content to (not yet implemented",
-        type=str
     )
     return parser.parse_args()
 
@@ -82,8 +83,14 @@ def browser_is_valid(args: argparse.Namespace) -> (bool, str):
     return is_valid, reason
 
 
+def directory_is_valid(args: argparse.Namespace) -> (bool, str):
+    is_valid = os.path.isdir(args.directory)
+    reason = '' if is_valid else f'{args.directory} is not a valid directory. You must provide one that exists!'
+    return is_valid, reason
+
+
 def format_is_valid(args: argparse.Namespace) -> (bool, str):
-    is_valid = args.format.lower() in VALID_FORMATS
+    is_valid = args.format in VALID_FORMATS
     reason = '' if is_valid else f'{args.format} is not a valid format. You must provide one of: {VALID_FORMATS}'
     return is_valid, reason
 
