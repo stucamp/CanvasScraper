@@ -36,7 +36,7 @@ class LinkScraper:
             self.get_page_list(course)
 
     def get_page_list(self, course_obj):
-        if course_obj.has_pages():
+        if not course_obj.has_pages():
             print(f"=============================================\n"
                   f"Retrieving Course Pages for: " + course_obj.name + "  \n"
                   f"=============================================")

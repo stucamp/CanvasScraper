@@ -56,6 +56,13 @@ def set_driver(path, args):
         raise InvalidBrowserException("No Appropriate webdriver found!")
 
 
+def set_format(args):
+    if args.format.lower() == 'mp4':
+        print(f"Video Selected")
+    elif args.format.lower() == 'mp3':
+        print(f"Audio Only Selected")
+
+
 
 def _exception_print(browser, driver, link):
     print(f"============================================================================\n"
@@ -89,23 +96,23 @@ def login(driver, args):
     return base_url
 
 
-def _test_link_scraper(driver, url):
+def _test_link_scraper(url, driver):
 
     course_arr = []
 
     link_scraper = LinkScraper(url, driver)
 
     print("\nTesting Class Finder\n")
-    if not link_scraper.has_class_list:
-        link_scraper.get_class_list()
+
+    link_scraper.get_class_list()
 
     print("\nTesting Page Finder\n")
-    if link_scraper.has_class_list and not link_scraper.has_page_list:
-        link_scraper.get_page_list()
+
+    link_scraper.get_all_pages()
 
     print("\nTesting Video Link Finder\n")
-    if link_scraper.has_class_list and link_scraper.has_page_list and not link_scraper.has_vid_list:
-        link_scraper.get_vid_list()
+
+    link_scraper.get_all_vids()
 
     print("\nTesting Return of Objects\n")
     for course in link_scraper.return_data():
@@ -113,10 +120,12 @@ def _test_link_scraper(driver, url):
     for course in course_arr:
         course.print_info()
 
+    return course_arr
 
-def _test_dir_maker(course_arr):
+
+def _test_dir_maker(course_arr, args):
     print("\nTesting DirMaker\n")
-    saver = DirMaker()
+    saver = DirMaker(None, args.format)
     saver.save_all(course_arr)
 
 
@@ -139,7 +148,7 @@ def main(args):
     driver = set_driver(driver_path, args)
     base_url = login(driver, args)
     print(f"Base URL Recorded as: {base_url}")
-    # _test_link_scraper()
-    # _test_dir_maker()
-    # _test_URL_logger()
+    courses = _test_link_scraper(base_url, driver)
+    _test_dir_maker(courses, args)
+    _test_URL_logger(courses)
     _user_quit(driver)
