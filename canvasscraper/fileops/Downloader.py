@@ -7,7 +7,7 @@ class Downloader:
     @staticmethod
     def download_as_video(vid_obj, path):
         ydl_opts = {
-            'outtmpl': f'{path}/{vid_obj.course} - {vid_obj.page} {vid_obj.name}',
+            'outtmpl': f'{path}/{vid_obj.course}/{vid_obj.page} {vid_obj.name}',
             'preferredquality': 'bestvideo/best',
             'preferredencoding': 'mp4',
             'replace_extension': 'yes',

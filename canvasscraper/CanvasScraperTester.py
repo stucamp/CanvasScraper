@@ -56,14 +56,6 @@ def set_driver(path, args):
         raise InvalidBrowserException("No Appropriate webdriver found!")
 
 
-def set_format(args):
-    if args.format.lower() == 'mp4':
-        print(f"Video Selected")
-    elif args.format.lower() == 'mp3':
-        print(f"Audio Only Selected")
-
-
-
 def _exception_print(browser, driver, link):
     print(f"============================================================================\n"
           f"{browser} Version does not match driver version.  Please ensure they match. \n"
@@ -91,7 +83,8 @@ def login(driver, args):
           f"Printing to confirm function.   \n"
           f"================================\n"
           f"Title:{driver.title}   \n"
-          f"URL: {driver.current_url}")
+          f"URL: {driver.current_url}\n"
+          f"Format: {args.format}\n")
 
     return base_url
 
@@ -124,13 +117,14 @@ def _test_link_scraper(url, driver):
 
 
 def _test_dir_maker(course_arr, args):
-    print("\nTesting DirMaker\n")
-    saver = DirMaker(None, args.format)
+    print(f"\nTesting DirMaker\n")
+    print(f"\n{args.format} selected\n")
+    saver = DirMaker(args.format, args.directory)
     saver.save_all(course_arr)
 
 
 def _test_URL_logger(course_arr):
-    print("\nTesting URLLogger\n")
+    print(f"\nTesting URLLogger\n")
     logger = URLLogger(course_arr)
     logger.write_URLs_to_file()
 
