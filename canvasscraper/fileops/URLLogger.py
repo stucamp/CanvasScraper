@@ -3,15 +3,12 @@ import os
 
 class URLLogger:
 
-    def __init__(self, course_arr, path=None):
+    def __init__(self, course_arr, path):
         self.courses = course_arr
         self.vid_list = {}
         self.vid_arr = []
-        self.cwd = os.getcwd()
-        if path is None:
-            self.path = os.getcwd()
-        else:
-            self.path = path
+        self.path = path
+
 
     def write_URLs_to_file(self):
         writer = open(f"{self.path}/videoList.txt", 'w+')
@@ -21,7 +18,7 @@ class URLLogger:
                     writer.write(f"{vid.course} {vid.page} {vid.name} - {vid.url}\n")
 
         writer.close()
-        os.chdir(self.cwd)
+        os.chdir(self.path)
 
 # TODO: Needs testing/ironing out
     def load_file_to_dict(self):

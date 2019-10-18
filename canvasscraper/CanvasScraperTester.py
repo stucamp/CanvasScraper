@@ -1,5 +1,4 @@
 import sys
-import getpass
 
 import pyderman as dr
 from selenium.webdriver.chrome import webdriver as CHdr
@@ -123,9 +122,9 @@ def _test_dir_maker(course_arr, args):
     saver.save_all(course_arr)
 
 
-def _test_URL_logger(course_arr):
+def _test_URL_logger(course_arr, args):
     print(f"\nTesting URLLogger\n")
-    logger = URLLogger(course_arr)
+    logger = URLLogger(course_arr, args.directory+f"/Courses")
     logger.write_URLs_to_file()
 
 
@@ -144,5 +143,5 @@ def main(args):
     print(f"Base URL Recorded as: {base_url}")
     courses = _test_link_scraper(base_url, driver)
     _test_dir_maker(courses, args)
-    _test_URL_logger(courses)
+    _test_URL_logger(courses, args)
     _user_quit(driver)

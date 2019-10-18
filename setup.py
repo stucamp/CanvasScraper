@@ -11,7 +11,7 @@ def readme(file='', split=False):
 
 setup(
     name='CanvasScraper',
-    version='0.4.4dev',
+    version='0.4.6dev',
     description='D/L Lectures/Data from Canvas',
     long_description=readme('README.md'),
     url='https://gitlab.com/stucamp/canvasscraper',
