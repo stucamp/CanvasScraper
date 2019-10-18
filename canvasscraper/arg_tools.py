@@ -5,7 +5,9 @@ import argparse
 import os
 
 VALID_BROWSERS = ['chrome', 'firefox']
-VALID_FORMATS = ['mp4', 'mp3']
+VALID_FORMATS = ['mp4',
+                 # 'mp3'
+                 ]
 BAD_USERNAME_CHARS = '_!?@#~ '
 
 
