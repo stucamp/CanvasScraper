@@ -87,10 +87,10 @@ class NavTool(object):
             self._go_for_vids(choice)
 
     def _get_all_vids(self):
-        self.scraper.get_all_pages()
+        self.scraper.get_all_vids()
 
     def _get_one_vids(self, choice):
-        self.scraper.get_page_list(self.scraper.courses[choice-1])
+        self.scraper.get_vid_list(self.scraper.courses[choice-1])
 
     def _go_for_vids(self, choice):
         if self._is_valid_course(choice):

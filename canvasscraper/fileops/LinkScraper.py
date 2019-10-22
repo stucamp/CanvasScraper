@@ -45,10 +45,10 @@ class LinkScraper:
             WebDriverWait(self.driver, 10).until(EC.title_contains(course_obj.name))
             for page in self.driver.find_elements_by_tag_name('a'):
                 self._if_page_get_page(page, course_obj)
-        else:
-            print(f"=============================================\n"
-                  f"No Course Pages for: " + course_obj.name + "  \n"
-                  f"=============================================")
+        # else:
+        #     print(f"=============================================\n"
+        #           f"Already Have Pages for: " + course_obj.name + "  \n"
+        #           f"=============================================")
 
     @staticmethod
     def _if_page_get_page(page, course_obj):
