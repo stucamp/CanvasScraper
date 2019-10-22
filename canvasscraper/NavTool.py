@@ -14,9 +14,9 @@ class NavTool(object):
             self._plz_get_courses()
 
         count = 0
-        print(f"================================================\n"
-              f"Selected which Course you'd like to {operation} \n"
-              f"=================================================")
+        print(f"=====================================================\n"
+              f"Select for which Course you'd like to {operation} \n"
+              f"=====================================================")
         print(f"{count}) All Courses")
         for course in self.scraper.courses:
             count += 1
@@ -25,8 +25,7 @@ class NavTool(object):
         return int(input("Enter Selection: "))
 
     def _plz_get_courses(self):
-        print(f"No Course list found!  Get Course list first? [Y/n]")
-        choice = input()
+        choice = input(f"No Course list found!  Get Course list first? [Y/n]")
         if choice is 'y' or 'Y' or '':
             self.get_courses()
         else:
@@ -96,12 +95,12 @@ class NavTool(object):
         if self._is_valid_course(choice):
             if choice is '0':
                 self._get_all_vids()
-            elif choice in range(1, len(self.scraper.courses)):
+            elif len(self.scraper.courses) >= choice > 0:
                 self._get_one_vids(choice)
 
 # Logic to test if ready for certain tasks
     def _is_valid_course(self, choice):
-        if choice in range(len(self.scraper.courses)):
+        if len(self.scraper.courses) >= choice > 0:
             return True
         else:
             self._plz_make_good_choice()

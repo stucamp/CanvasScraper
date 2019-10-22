@@ -21,6 +21,7 @@ class LinkScraper:
         print(f"=========================\n"
               f"Retrieving Active Courses\n"
               f"=========================")
+        self.courses = []
         for course in self.driver.find_elements_by_tag_name('a'):
             self._if_class_get_class(course, self.courses)
         self.has_class_list = True
