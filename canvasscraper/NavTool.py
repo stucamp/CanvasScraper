@@ -9,6 +9,10 @@ class NavTool(object):
 
 # Helper functions to ensure appropriate selections are made by user.  Interface - ish
     def _for_what_course(self, operation):
+
+        if not self.scraper.has_class_list:
+            self._plz_get_courses()
+
         count = 0
         print(f"================================================\n"
               f"Selected which Course you'd like to {operation} \n"
@@ -116,3 +120,6 @@ class NavTool(object):
         else:
             self._plz_get_pages()
             self._is_ready_for_vids(choice)
+
+    def ret_classes(self):
+        return self.scraper.courses

@@ -13,6 +13,7 @@ from selenium.common.exceptions import SessionNotCreatedException
 from canvasscraper.fileops.LinkScraper import LinkScraper
 from canvasscraper.fileops.DirMaker import DirMaker
 from canvasscraper.fileops.URLLogger import URLLogger
+from canvasscraper.NavTool import NavTool
 
 
 AUTHOR = "stucampbell.git@gmail.com"
@@ -91,19 +92,15 @@ def login(driver, args):
 def _test_link_scraper(url, driver):
 
     course_arr = []
-
     link_scraper = LinkScraper(url, driver)
 
     print("\nTesting Class Finder\n")
-
     link_scraper.get_class_list()
 
     print("\nTesting Page Finder\n")
-
     link_scraper.get_all_pages()
 
     print("\nTesting Video Link Finder\n")
-
     link_scraper.get_all_vids()
 
     print("\nTesting Return of Objects\n")
@@ -113,6 +110,23 @@ def _test_link_scraper(url, driver):
         course.print_info()
 
     return course_arr
+
+
+def _test_nav_tools(url, driver):
+
+    nav_tools = NavTool(url, driver)
+
+    print("\nTesting Courses\n")
+    nav_tools.get_courses()
+
+    print("\nTesting Pages\n")
+    nav_tools.get_pages()
+
+    print("\nTesting Vids\n")
+    nav_tools.get_vids()
+
+    print("\nTesting Return\n")
+    return nav_tools.ret_classes()
 
 
 def _test_dir_maker(course_arr, args):
@@ -141,7 +155,8 @@ def main(args):
     driver = set_driver(driver_path, args)
     base_url = login(driver, args)
     print(f"Base URL Recorded as: {base_url}")
-    courses = _test_link_scraper(base_url, driver)
+
+    courses = _test_nav_tools(base_url, driver)
     _test_dir_maker(courses, args)
     _test_URL_logger(courses, args)
     _user_quit(driver)
