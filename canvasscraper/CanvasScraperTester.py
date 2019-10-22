@@ -157,6 +157,6 @@ def main(args):
     print(f"Base URL Recorded as: {base_url}")
 
     courses = _test_nav_tools(base_url, driver)
-    _test_dir_maker(courses, args)
+    # _test_dir_maker(courses, args)
     _test_URL_logger(courses, args)
     _user_quit(driver)

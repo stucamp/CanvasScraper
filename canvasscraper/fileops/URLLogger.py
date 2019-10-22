@@ -9,13 +9,15 @@ class URLLogger:
         self.vid_arr = []
         self.path = path
 
-
     def write_URLs_to_file(self):
         writer = open(f"{self.path}/videoList.txt", 'w+')
         for course in self.courses:
-            for name, page_obj in course.pages.items():
-                for vid in page_obj.videos:
-                    writer.write(f"{vid.course} {vid.page} {vid.name} - {vid.url}\n")
+            if course.has_pages():
+                for name, page_obj in course.pages.items():
+                    for vid in page_obj.videos:
+                        writer.write(f"{vid.course} {vid.page} {vid.name} - {vid.url}\n")
+            else:
+                writer.write(f"{course.name} has no pages recorded.")
 
         writer.close()
         os.chdir(self.path)

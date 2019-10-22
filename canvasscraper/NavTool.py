@@ -122,3 +122,17 @@ class NavTool(object):
 
     def ret_classes(self):
         return self.scraper.courses
+
+# Determine choices
+    def _multi_choice(self, choices):
+        arr_choices = []
+        if len(choices) > 1:
+            for d in str(choices):
+                arr_choices.append(int(d))
+            return arr_choices
+        elif len(choices) == 1:
+            arr_choices.append(choices)
+            return arr_choices
+        else:
+            return -1
+

@@ -15,7 +15,7 @@ class Course(object):
         self.pages[name] = Page(name, url, self.name)
 
     def has_pages(self):
-        return len(self.pages) > 0
+        return bool(self.pages)
 
     def print_info(self):
         print("======================================================================================================")

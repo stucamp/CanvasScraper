@@ -35,9 +35,9 @@ class DirMaker:
                         if self.formattype == 'mp4':
                             print(f"\t\tDownloading Video from: {vid.url}")
                             Downloader.download_as_video(vid, self.new_base_dir+f"/{course_obj.name}")
-                        elif self.formattype == 'mp3':
-                            print(f"\t\tDownloading Audio from: {vid.url}")
-                            Downloader.download_as_mp3(vid, self.new_base_dir+f"/{course_obj.name}")
+                        # elif self.formattype == 'mp3':
+                        #     print(f"\t\tDownloading Audio from: {vid.url}")
+                        #     Downloader.download_as_mp3(vid, self.new_base_dir+f"/{course_obj.name}")
                 else:
                     print(f"\tPage: {name} has no videos, nothing to save!")
         else:
