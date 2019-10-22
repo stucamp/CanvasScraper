@@ -74,9 +74,9 @@ class NavTool(object):
 
     def _go_for_pages(self, choice):
         if self._is_valid_course(choice):
-            if choice is '0':
+            if choice is 0:
                 self._get_all_pages()
-            elif choice in range(1, len(self.scraper.courses)):
+            elif len(self.scraper.courses) >= choice > 0:
                 self._get_one_pages(choice)
 
 # Functions to determine how many courses retrieving videos for.
@@ -93,7 +93,7 @@ class NavTool(object):
 
     def _go_for_vids(self, choice):
         if self._is_valid_course(choice):
-            if choice is '0':
+            if choice is 0:
                 self._get_all_vids()
             elif len(self.scraper.courses) >= choice > 0:
                 self._get_one_vids(choice)
