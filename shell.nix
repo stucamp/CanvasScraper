@@ -1,18 +1,19 @@
-with import<nixpkgs> {};
+with import <nixpkgs> {}; {
+  resumeEnv = stdenv.mkDerivation {
+    name = "python38";
+    buildInputs = [ 
+      stdenv 
+      python38Full 
+      python38Packages.virtualenv 
+    ];
 
-stdenv.mkDerivation rec {
-name = "env";
-
-  dependencies = [
-    python38
-    python38Packages.toolz
-    python38Packages.selenium
-    python38Packages.youtube-dl
-  ];
-
-  env = buildEnv {
-    name = name;
-    paths = dependencies;
+    shellHook = ''
+      if [ ! -d venv ]; then
+        virtualenv --python=python3.8 venv
+        if [ -e requirements.txt ]; then
+          ./venv/bin/pip install -r requirements.txt
+        fi
+      fi
+    '';
   };
-
 }
