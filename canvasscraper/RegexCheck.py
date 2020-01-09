@@ -4,6 +4,7 @@ import re
 class Regex:
 
     # TODO: As more/varied video hosting sites are discovered, regex will need to be expanded.
+    # TODO: New Semester Incoming... will add new vid sites as needed.
     def __init__(self):
         self.url = ""
         self.regex_dict = {
@@ -25,5 +26,3 @@ class Regex:
                 return True
         print("Regex: No Match")
         return False
-
-

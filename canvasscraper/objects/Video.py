@@ -12,4 +12,3 @@ class Video(object):
 
     def print_info(self):
         print(f"\t\t{self.name} at {self.url}")
-

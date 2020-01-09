@@ -81,4 +81,3 @@ class LinkScraper:
 
     def return_data(self):
         return self.courses
-

@@ -16,6 +16,7 @@ class Downloader:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([vid_obj.url])
 
+    # TODO: Need to sort out the audio post processing a bit.
     # @staticmethod
     # def download_as_mp3(vid_obj, path):
     #     ydl_opts = {

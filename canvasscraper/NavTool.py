@@ -135,4 +135,3 @@ class NavTool(object):
             return arr_choices
         else:
             return -1
-

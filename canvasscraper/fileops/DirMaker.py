@@ -35,6 +35,7 @@ class DirMaker:
                         if self.formattype == 'mp4':
                             print(f"\t\tDownloading Video from: {vid.url}")
                             Downloader.download_as_video(vid, self.new_base_dir+f"/{course_obj.name}")
+                        # TODO: Still need to sort out the audio post processing/directory stuff.
                         # elif self.formattype == 'mp3':
                         #     print(f"\t\tDownloading Audio from: {vid.url}")
                         #     Downloader.download_as_mp3(vid, self.new_base_dir+f"/{course_obj.name}")
@@ -47,7 +48,3 @@ class DirMaker:
 
         for course in course_arr:
             self.save_course(course)
-
-
-
-
