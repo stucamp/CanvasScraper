@@ -1,3 +1,0 @@
-pyderman
-selenium
-youtube-dl

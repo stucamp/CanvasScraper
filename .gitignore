@@ -8,6 +8,7 @@
 env/
 venv/
 .idea/
+dist/*
 
 
 #
@@ -28,3 +29,4 @@ canvasscraper/*.log
 build
 dist/
 sdist/
+*.egg-info/
