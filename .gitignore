@@ -9,6 +9,8 @@ env/
 venv/
 .idea/
 dist/*
+Pipfile
+Pipfile.lock
 
 
 #
