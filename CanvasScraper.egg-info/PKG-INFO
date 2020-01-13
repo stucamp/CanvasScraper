@@ -1,0 +1,69 @@
+Metadata-Version: 1.2
+Name: CanvasScraper
+Version: 0.5.6.dev0
+Summary: D/L Lectures/Data from Canvas
+Home-page: https://gitlab.com/stucamp/canvasscraper
+Author: Stu Campbell
+Author-email: stucampbell.git@gmail.com
+License: MIT License
+Description:   # CanvasScraper (Lecture Downloader) 
+          [![pipeline status](https://gitlab.com/stucamp/canvasscraper/badges/master/pipeline.svg)](https://gitlab.com/stucamp/canvasscraper/commits/master)
+          [![coverage report](https://gitlab.com/stucamp/canvasscraper/badges/master/coverage.svg)](https://gitlab.com/stucamp/canvasscraper/commits/master)
+        
+        ### Description
+        
+        A simple program that facilitates the downloading of course materials hosted on Canvas Online Learning Platform.  Using Google Chrome (chromedriver) or Firefox (geckodriver), either with or without GUI, after logging-in, it will traverse your courses, finding video links and download them as videos you can watch off-line or mp3 for you to listen on the go.
+        
+        ### Installation
+        
+        To install the library, run:
+        
+        pip3 install canvasscraper
+        
+        
+        ### Configuration
+        
+        Then either call it in your code like so:
+        
+        from canvasscraper.fileops import XXXX
+        from canvasscraper.objects import XXXX
+        
+        Or run it as a CLI program using (coming soon):
+        
+        -b broswer
+        -gui is flagged will show browser as functions
+        -up username password
+        -sch school subdomain asu by default
+        
+        
+        There will options for the output directory structure, saving of URL list, potentially saving of slide, and 
+        maybe even page text saved to file.
+        
+        This is an example of download file structure/options:
+        
+        
+        
+        ### Requirements
+        
+        https://github.com/shadowmoose/pyderman
+        
+        https://github.com/SeleniumHQ/selenium
+        
+        https://github.com/ytdl-org/youtube-dl
+        
+        ### Useful Resources
+        
+Platform: UNKNOWN
+Classifier: Topic :: Education
+Classifier: Topic :: Education :: Computer Aided Instruction (CAI)
+Classifier: Topic :: Multimedia :: Video
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.5
